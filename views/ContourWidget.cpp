@@ -6,7 +6,8 @@
 #include <QPainter>
 #include <QPaintEvent>
 
-#include "Contour.hpp"
+#include "domain/usecases/EditVoice.hpp"
+#include "models/Contour.hpp"
 #include "ContourWidget.hpp"
 
 ContourWidget::ContourWidget(const Contour *contour, const ContourWidgetStyle &contourWidgetStyle, QWidget *parent)

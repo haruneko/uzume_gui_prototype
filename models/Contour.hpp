@@ -4,7 +4,10 @@
 #ifndef __UZUME_PROTOTYPE_CONTOUR_HPP__
 #define __UZUME_PROTOTYPE_CONTOUR_HPP__
 
-namespace uzume { namespace vocoder { class Spectrogram; } }
+namespace uzume { namespace vocoder {
+    class Spectrogram;
+    class Waveform;
+} }
 
 class Contour {
 public:
@@ -22,11 +25,25 @@ public:
         spectrogram(spectrogram) {
     }
 
-    double msLength() const final;
-    double at(double ms) const final;
+    double msLength() const override;
+    double at(double ms) const override;
 
 private:
-    const uzume::vocoder::Spectrogram *spectrogram{};
+    const uzume::vocoder::Spectrogram *spectrogram;
+};
+
+class WaveformDynamicsContour final : public Contour {
+public:
+    WaveformDynamicsContour() = delete;
+    explicit WaveformDynamicsContour(const uzume::vocoder::Waveform *waveform, double msFramePeriod) :
+        waveform(waveform), msFramePeriod(msFramePeriod) {
+    }
+
+    double msLength() const override;
+    double at(double ms) const override;
+private:
+    const uzume::vocoder::Waveform *waveform;
+    const double msFramePeriod;
 };
 
 #endif // __UZUME_PROTOTYPE_CONTOUR_HPP__

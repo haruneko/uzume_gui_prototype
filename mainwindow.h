@@ -7,6 +7,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+class EditVoice;
 namespace uzume { namespace vocoder { class WaveformSpectrogram; } }
 
 class MainWindow : public QMainWindow
@@ -19,9 +20,10 @@ public:
 
 public Q_SLOT:
     void openFile();
+    void saveFile();
 
 private:
     Ui::MainWindow *ui;
-    uzume::vocoder::WaveformSpectrogram *waveformSpectrogram;
+    EditVoice *editor;
 };
 #endif // MAINWINDOW_H

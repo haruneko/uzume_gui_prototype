@@ -19,8 +19,12 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        views/Contour.hpp
-        views/Contour.cpp
+        domain/entities/WaveformFragments.hpp
+        domain/entities/WaveformFragments.cpp
+        domain/usecases/EditVoice.hpp
+        domain/usecases/EditVoice.cpp
+        models/Contour.hpp
+        models/Contour.cpp
         views/ContourWidget.hpp
         views/ContourWidget.cpp
         ${TS_FILES}
