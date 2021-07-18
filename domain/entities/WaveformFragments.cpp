@@ -81,7 +81,7 @@ bool WaveformFragments::divideAt(double ms) {
     WaveformFragment next(dividedRelativePosition, iterator->msRight, currentMs - ms);
     iterator->msLength = ms - previousMs;
     iterator->msRight = dividedRelativePosition;
-    fragments.insert(iterator, next);
+    fragments.insert(++iterator, next);
     return true;
 }
 
