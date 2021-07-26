@@ -27,6 +27,8 @@ set(PROJECT_SOURCES
         models/Contour.cpp
         views/ContourWidget.hpp
         views/ContourWidget.cpp
+        views/WaveformFragmentsWidget.hpp
+        views/WaveformFragmentsWidget.cpp
         ${TS_FILES}
 )
 

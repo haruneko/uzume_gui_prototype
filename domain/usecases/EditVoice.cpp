@@ -15,8 +15,8 @@
 using namespace uzume::vocoder;
 using namespace uzume::vocoder::world;
 
-EditVoice::EditVoice() :
-    waveform(nullptr), fragments(nullptr), spectrogram(nullptr) {
+EditVoice::EditVoice(QObject *parent)
+        : QObject(parent), waveform(nullptr), fragments(nullptr), spectrogram(nullptr) {
 }
 
 EditVoice::~EditVoice() {
@@ -27,6 +27,10 @@ EditVoice::~EditVoice() {
 
 const WaveformSpectrogram *EditVoice::waveformSpectrogram() const {
     return spectrogram;
+}
+
+const WaveformFragments *EditVoice::waveformFragments() const {
+    return fragments;
 }
 
 bool EditVoice::initWith(const char *filepath) {
@@ -44,6 +48,7 @@ bool EditVoice::initWith(const char *filepath) {
     fragments = new WaveformFragments(w->msLength());
     delete spectrogram;
     spectrogram = new WaveformSpectrogram(waveform);
+    emit this->fragmentChanged(fragments);
     return true;
 }
 
@@ -85,4 +90,31 @@ bool EditVoice::synthesize(const char *filepath) {
     }
 
     return result;
+}
+
+void EditVoice::divideAt(double ms) {
+    if(this->fragments == nullptr) {
+        return;
+    }
+    if(this->fragments->divideAt(ms)) {
+        emit this->fragmentChanged(fragments);
+    }
+}
+
+void EditVoice::extend(int index, double ms) {
+    if(this->fragments == nullptr) {
+        return;
+    }
+    if(this->fragments->setLength(index, ms)) {
+        emit this->fragmentChanged(fragments);
+    }
+}
+
+void EditVoice::mergeToPrevious(int index) {
+    if(this->fragments == nullptr) {
+        return;
+    }
+    if(this->fragments->mergeToPrevious(index)) {
+        emit fragmentChanged(fragments);
+    }
 }

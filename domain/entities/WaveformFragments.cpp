@@ -27,14 +27,14 @@ int WaveformFragments::indexAt(double ms) const {
     return -1;
 }
 
-bool WaveformFragments::extend(int index, double ms) {
-    if(index < 0 || fragments.size() <= index) {
+bool WaveformFragments::setLength(int indexAt, double msLength) {
+    if(indexAt < 0 || fragments.size() <= indexAt) {
         return false;
     }
     int i = 0;
     for(auto iterator = fragments.begin(); iterator != fragments.end(); iterator++, i++) {
-        if(i == index) {
-            (*iterator).msLength += ms;
+        if(i == indexAt) {
+            (*iterator).msLength = msLength;
             if((*iterator).msLength < 0.0) {
                 (*iterator).msLength = 0.0;
             }

@@ -20,11 +20,11 @@ public:
 
 class WaveformFragments final {
 public:
-    WaveformFragments(double msLength);
+    explicit WaveformFragments(double msLength);
 
     int indexAt(double ms) const;
 
-    bool extend(int index, double ms);
+    bool setLength(int indexAt, double msLength);
     bool divideAt(double ms);
     bool mergeToPrevious(int index);
 
