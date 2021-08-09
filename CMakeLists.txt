@@ -23,8 +23,6 @@ set(PROJECT_SOURCES
         domain/entities/WaveformFragments.cpp
         domain/usecases/EditVoice.hpp
         domain/usecases/EditVoice.cpp
-        models/Contour.hpp
-        models/Contour.cpp
         views/WaveformFragmentDynamicsWidget.hpp
         views/WaveformFragmentDynamicsWidget.cpp
         views/WaveformFragmentsWidget.hpp
