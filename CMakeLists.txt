@@ -25,8 +25,6 @@ set(PROJECT_SOURCES
         domain/usecases/EditVoice.cpp
         models/Contour.hpp
         models/Contour.cpp
-        views/ContourWidget.hpp
-        views/ContourWidget.cpp
         views/WaveformFragmentsWidget.hpp
         views/WaveformFragmentsWidget.cpp
         ${TS_FILES}

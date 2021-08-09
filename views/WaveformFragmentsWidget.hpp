@@ -9,13 +9,6 @@
 class WaveformFragment;
 class WaveformFragments;
 
-class WaveformFragmentWidget final : public QWidget {
-    Q_OBJECT
-public:
-    WaveformFragmentWidget() = delete;
-    explicit WaveformFragmentWidget(const WaveformFragment *fragment, QWidget *parent) : QWidget(parent) { }
-};
-
 class WaveformFragmentsWidget : public QSplitter {
     Q_OBJECT
 public:
