@@ -16,13 +16,17 @@ using namespace uzume::vocoder;
 using namespace uzume::vocoder::world;
 
 EditVoice::EditVoice(QObject *parent)
-        : QObject(parent), waveform(nullptr), fragments(nullptr), spectrogram(nullptr) {
+        : QObject(parent), _waveform(nullptr), fragments(nullptr), spectrogram(nullptr) {
 }
 
 EditVoice::~EditVoice() {
-    delete waveform;
+    delete _waveform;
     delete fragments;
     delete spectrogram;
+}
+
+const Waveform *EditVoice::waveform() const {
+    return _waveform;
 }
 
 const WaveformSpectrogram *EditVoice::waveformSpectrogram() const {
@@ -42,18 +46,18 @@ bool EditVoice::initWith(const char *filepath) {
         delete w;
         return false;
     }
-    delete waveform;
-    waveform = w;
+    delete _waveform;
+    _waveform = w;
     delete fragments;
     fragments = new WaveformFragments(w->msLength());
     delete spectrogram;
-    spectrogram = new WaveformSpectrogram(waveform);
+    spectrogram = new WaveformSpectrogram(_waveform);
     emit this->fragmentChanged(fragments);
     return true;
 }
 
 bool EditVoice::synthesize(const char *filepath) {
-    if(!waveform || ! fragments) {
+    if(!_waveform || ! fragments) {
         return false;
     }
 
@@ -70,7 +74,7 @@ bool EditVoice::synthesize(const char *filepath) {
         specs.emplace_back(s);
     }
 
-    auto *output = new Waveform(length, waveform->samplingFrequency);
+    auto *output = new Waveform(length, _waveform->samplingFrequency);
     auto *spec = ArraySpectrogramAggregator::from(specs);
 
     SynthesizeWaveformWithWORLD synthesize;

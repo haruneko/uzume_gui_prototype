@@ -6,6 +6,10 @@
 
 #include <QSplitter>
 
+namespace uzume { namespace vocoder {
+class Waveform;
+} }
+
 class WaveformFragment;
 class WaveformFragments;
 
@@ -13,7 +17,7 @@ class WaveformFragmentsWidget : public QSplitter {
     Q_OBJECT
 public:
     WaveformFragmentsWidget() = delete;
-    explicit WaveformFragmentsWidget(double msLength, QWidget *parent);
+    explicit WaveformFragmentsWidget(const uzume::vocoder::Waveform *waveform, double msLength, QWidget *parent);
     ~WaveformFragmentsWidget() noexcept override = default;
 public slots:
     void onWaveformFragmentsUpdated(const WaveformFragments *fragments);
@@ -30,6 +34,7 @@ private:
     double msAt(int x) const;
     int xAt(double ms) const;
 
+    const uzume::vocoder::Waveform *waveform;
     double msLength;
 };
 

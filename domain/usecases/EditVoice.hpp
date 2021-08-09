@@ -22,6 +22,7 @@ public:
     bool initWith(const char *filepath);
     bool synthesize(const char *filepath);
 
+    const uzume::vocoder::Waveform *waveform() const;
     const uzume::vocoder::WaveformSpectrogram *waveformSpectrogram() const;
     const WaveformFragments *waveformFragments() const;
 
@@ -34,7 +35,7 @@ public slots:
     void mergeToPrevious(int index);
 
 private:
-    uzume::vocoder::Waveform *waveform;
+    uzume::vocoder::Waveform *_waveform;
     WaveformFragments *fragments;
     uzume::vocoder::WaveformSpectrogram *spectrogram;
 };

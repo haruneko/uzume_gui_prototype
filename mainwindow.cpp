@@ -41,16 +41,10 @@ void MainWindow::openFile()
         return;
     }
 
-    if(this->ui->centralwidget->widget() != nullptr) {
-        this->ui->centralwidget->widget()->deleteLater();
-    }
-
-    auto wfw = new WaveformFragmentsWidget(editor->waveformFragments()->msLength(), this);
+    auto wfw = new WaveformFragmentsWidget(editor->waveform(), editor->waveformFragments()->msLength(), this);
     wfw->setMinimumWidth(640);
-    auto p = wfw->palette();
-    p.setColor(QPalette::Window, QColor(0, 30, 30));
-    wfw->setPalette(p);
-    this->ui->centralwidget->setWidget(wfw);
+    wfw->onWaveformFragmentsUpdated(editor->waveformFragments());
+    setCentralWidget(wfw);
 
     connect(wfw, &WaveformFragmentsWidget::waveformFragmentsDividedAt, editor, &EditVoice::divideAt);
     connect(wfw, &WaveformFragmentsWidget::waveformFragmentExtended, editor, &EditVoice::extend);
